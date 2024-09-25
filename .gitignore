@@ -33,3 +33,4 @@ postgres-db-volume
 
 # Docker related files
 docker-compose.yaml
+venv/
