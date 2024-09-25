@@ -1,0 +1,35 @@
+# Environment variables and secrets
+.env
+*.env
+
+# Python related files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Airflow related files
+airflow.cfg
+airflow.db
+airflow-webserver.pid
+logs/
+unittests.cfg
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Other temporary files
+*.log
+*.tmp
+
+# Postgres data
+postgres-db-volume
+
+# Docker related files
+docker-compose.yaml
