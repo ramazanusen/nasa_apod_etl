@@ -13,7 +13,7 @@ This project fetches, processes, and stores daily space photos using NASA's Astr
 
 1. Clone the repository:
    ```
-   git clone https://github.com/ramazanusen/nasa-space-photo-etl.git
+   git clone https://github.com/ramazanusen/nasa_apod_etl.git
    ```
 
 2. Install the required dependencies:
