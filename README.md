@@ -30,13 +30,6 @@ This project fetches, processes, and stores daily space photos using NASA's Astr
    DB_PASSWORD=your_database_password
    ```
 
-## Usage
-
-To run the project:
-
-```
-python main.py
-```
 
 ## Contributing
 
