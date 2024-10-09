@@ -47,4 +47,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 Project Owner: [Ramazan Usen](https://github.com/ramazanusen)
 
-Project Link: [https://github.com/ramazanusen/nasa-space-photo-etl](https://github.com/ramazanusen/nasa-space-photo-etl)
+Project Link: [[https://github.com/ramazanusen/nasa-space-photo-etl](https://github.com/ramazanusen/nasa-space-photo-etl)](https://github.com/ramazanusen/nasa_apod_etl)
