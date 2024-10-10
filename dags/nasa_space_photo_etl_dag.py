@@ -6,7 +6,9 @@ import requests
 import psycopg2
 import json
 import os
+import logging
 
+logging.basicConfig(level=logging.INFO)
 
 load_dotenv()
 # Default arguments for the DAG
@@ -31,8 +33,8 @@ dag = DAG(
 
 # Function to extract data from the NASA APOD API
 def extract_apod_data(**kwargs):
+    logging.info('Extracting data from NASA API')
     api_key = os.getenv("NASA_API_KEY")
-    print(api_key)
     url = f'https://api.nasa.gov/planetary/apod?api_key={api_key}'
     response = requests.get(url)
     if response.status_code == 200:
@@ -43,6 +45,7 @@ def extract_apod_data(**kwargs):
 
 # Function to transform the data
 def transform_data(**kwargs):
+    logging.info('Transforming data')
     apod_data = kwargs['ti'].xcom_pull(key='apod_data', task_ids='extract_apod_data')
     transformed_data = {
         'date': apod_data.get('date'),
@@ -54,6 +57,7 @@ def transform_data(**kwargs):
     kwargs['ti'].xcom_push(key='transformed_data', value=transformed_data)
 
 def create_table(**kwargs):
+    logging.info('Creating table')
     conn = psycopg2.connect(
         host=os.getenv("POSTGRES_HOST"),
         database=os.getenv("POSTGRES_DB"),
@@ -75,8 +79,6 @@ def create_table(**kwargs):
     cursor.close()
     conn.close()
 
-# ... (diğer fonksiyonlar aynı kalır)
-
 # Define the tasks
 create_table_task = PythonOperator(
     task_id='create_table',
@@ -86,6 +88,7 @@ create_table_task = PythonOperator(
 )
 # Function to load the data into PostgreSQL
 def load_data_to_postgres(**kwargs):
+    logging.info('Loading data to PostgreSQL')
     transformed_data = kwargs['ti'].xcom_pull(key='transformed_data', task_ids='transform_data')
     conn = psycopg2.connect(
         host=os.getenv("POSTGRES_HOST"),
@@ -133,6 +136,7 @@ load_task = PythonOperator(
 )
 
 def verify_loaded_data(**kwargs):
+    logging.info('Verifying the loaded data')
     conn = psycopg2.connect(
         host=os.getenv("POSTGRES_HOST"),
         database="nasa_space_image",
